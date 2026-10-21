@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Webots local caches e executaveis de runtime
+controllers/*/runtime.ini
+carrinho-autonomo/controllers/*/runtime.ini
+*.wbproj
+
+# Pastas de resultados de testes e temporarios
+test-results/
+carrinho-autonomo/test-results/
+tmp/
+carrinho-autonomo/tmp/
+
+# Pastas de outros projetos locais nao relacionados a IA
+audio_download/
+video_upscale/
+textura_madeira/
+modelo_uml/
+universidade_sql/
+revisao_marco1/
+backups/
+Universidade_SQL_PostgreSQL.zip
+
+# Diretorios vazios remanescentes na raiz
+/controllers/

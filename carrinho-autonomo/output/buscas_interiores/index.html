@@ -1,0 +1,50 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Buscas no campus</title>
+<style>body{font:16px system-ui;max-width:1200px;margin:40px auto;padding:0 24px;color:#24343d;background:#fafbfc}
+img{width:100%;height:auto;background:white}table{border-collapse:collapse;font-size:14px}td,th{padding:8px;border-bottom:1px solid #ddd;text-align:left}
+summary{cursor:pointer;padding:15px;background:#e1f0e8;margin-top:12px}a{color:#075b78}</style>
+<h1>Buscas no campus provisório</h1><p>Grade de 1 × 1 metro. Planejamento de rota; o controlador continua manual.</p>
+<p>Verde: centro livre conectado à entrada. Vermelho claro: centro bloqueado pela margem.
+Amarelo: livre, mas isolado. As paredes físicas estão em cinza.</p>
+<p>1500 células · 1090 livres · 1894 arestas · raio conservador 0.543 m.</p>
+<img src="grade_identificada.png" alt="Grade com IDs e ocupação"><h2>Comparação medida</h2><img src="comparacao.png" alt="Custo, expansões e tempo em três mapas">
+<p>As barras de tempo mostram mediana e intervalo interquartil. Tempos pequenos variam com o computador. Largura e custo uniforme têm o mesmo custo porque cada aresta mede 1 m. Os mapas são recortes do mesmo cenário, não três plantas independentes.</p>
+<h2>Referências e centros associados</h2><table><tr><th>Local</th><th>DEF da célula associada</th><th>Conector (m)</th></tr>
+<tr><td>EXT01 — Entrada IESB</td><td>CEL_C24_L01</td><td>0.707</td></tr>
+<tr><td>EXT02 — Cruzamento Central</td><td>CEL_C24_L14</td><td>0.500</td></tr>
+<tr><td>EXT03 — Acesso Biblioteca</td><td>CEL_C20_L06</td><td>0.000</td></tr>
+<tr><td>EXT04 — Acesso Central de Atendimento</td><td>CEL_C29_L06</td><td>0.000</td></tr>
+<tr><td>EXT05 — Acesso Bloco E</td><td>CEL_C20_L14</td><td>0.000</td></tr>
+<tr><td>EXT06 — Acesso Blocos B/C/D</td><td>CEL_C12_L19</td><td>0.500</td></tr>
+<tr><td>EXT07 — Acesso Blocos H/F/J</td><td>CEL_C37_L19</td><td>0.500</td></tr>
+<tr><td>EXT08 — Acesso Cantina</td><td>CEL_C29_L14</td><td>0.000</td></tr>
+<tr><td>BB01 — Biblioteca</td><td>CEL_C14_L06</td><td>0.000</td></tr>
+<tr><td>CDA01 — Central de Atendimento</td><td>CEL_C35_L06</td><td>0.000</td></tr>
+<tr><td>H01 — Bloco H</td><td>CEL_C29_L25</td><td>0.000</td></tr>
+<tr><td>F01 — Bloco F</td><td>CEL_C37_L25</td><td>0.000</td></tr>
+<tr><td>J01 — Bloco J</td><td>CEL_C45_L25</td><td>0.000</td></tr>
+<tr><td>E01 — Bloco E</td><td>CEL_C14_L14</td><td>0.000</td></tr>
+<tr><td>D01 — Bloco D</td><td>CEL_C20_L25</td><td>0.000</td></tr>
+<tr><td>C01 — Bloco C</td><td>CEL_C12_L25</td><td>0.000</td></tr>
+<tr><td>B01 — Bloco B</td><td>CEL_C04_L25</td><td>0.000</td></tr>
+<tr><td>CAN01 — Cantina</td><td>CEL_C35_L14</td><td>0.000</td></tr>
+</table><p>A célula associada pode ser diferente daquela que contém o marcador. O conector reto foi validado e não integra o custo da grade. O CSV também informa o percurso com os dois conectores.</p>
+<p>Interiores inacessíveis desde a entrada nesta discretização: . Os 18 marcadores são referências de acesso e continuam acessíveis.</p>
+<h2>Rotas e expansões: pequeno</h2>
+<details><summary>Profundidade</summary><img src="rota_pequeno_0.png" alt="Rota e expansões de Profundidade"></details>
+<details><summary>Largura</summary><img src="rota_pequeno_1.png" alt="Rota e expansões de Largura"></details>
+<details><summary>Custo uniforme</summary><img src="rota_pequeno_2.png" alt="Rota e expansões de Custo uniforme"></details>
+<details><summary>Gulosa</summary><img src="rota_pequeno_3.png" alt="Rota e expansões de Gulosa"></details>
+<details><summary>A*</summary><img src="rota_pequeno_4.png" alt="Rota e expansões de A*"></details>
+<h2>Rotas e expansões: medio</h2>
+<details><summary>Profundidade</summary><img src="rota_medio_0.png" alt="Rota e expansões de Profundidade"></details>
+<details><summary>Largura</summary><img src="rota_medio_1.png" alt="Rota e expansões de Largura"></details>
+<details><summary>Custo uniforme</summary><img src="rota_medio_2.png" alt="Rota e expansões de Custo uniforme"></details>
+<details><summary>Gulosa</summary><img src="rota_medio_3.png" alt="Rota e expansões de Gulosa"></details>
+<details><summary>A*</summary><img src="rota_medio_4.png" alt="Rota e expansões de A*"></details>
+<h2>Rotas e expansões: campus</h2>
+<details><summary>Profundidade</summary><img src="rota_campus_0.png" alt="Rota e expansões de Profundidade"></details>
+<details><summary>Largura</summary><img src="rota_campus_1.png" alt="Rota e expansões de Largura"></details>
+<details><summary>Custo uniforme</summary><img src="rota_campus_2.png" alt="Rota e expansões de Custo uniforme"></details>
+<details><summary>Gulosa</summary><img src="rota_campus_3.png" alt="Rota e expansões de Gulosa"></details>
+<details><summary>A*</summary><img src="rota_campus_4.png" alt="Rota e expansões de A*"></details>
+<p>Dados: <a href="comparacao.csv">comparação</a> · <a href="associacoes.csv">associações</a> · <a href="celulas.csv">células</a> · <a href="grafo.json">grafo</a> · <a href="resultados.json">rotas, ordens, amostras e ambiente</a>.</p></html>

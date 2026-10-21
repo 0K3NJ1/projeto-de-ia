@@ -1,0 +1,4 @@
+# Só para regenerar as texturas dos rótulos. Abrir os mundos não exige Pillow.
+Pillow>=10,<13
+# Gráficos dos experimentos de busca; não é necessário para abrir o mundo.
+matplotlib>=3.8,<4

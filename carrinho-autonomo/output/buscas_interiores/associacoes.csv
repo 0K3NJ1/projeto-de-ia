@@ -1,0 +1,19 @@
+﻿local,nome,celula_contem_ponto,celula,distancia_m,componente,acessivel_desde_entrada
+EXT01,Entrada IESB,CEL_C25_L02,CEL_C24_L01,0.7071067811865476,0,True
+EXT02,Cruzamento Central,CEL_C25_L14,CEL_C24_L14,0.5,0,True
+EXT03,Acesso Biblioteca,CEL_C20_L06,CEL_C20_L06,0.0,0,True
+EXT04,Acesso Central de Atendimento,CEL_C29_L06,CEL_C29_L06,0.0,0,True
+EXT05,Acesso Bloco E,CEL_C20_L14,CEL_C20_L14,0.0,0,True
+EXT06,Acesso Blocos B/C/D,CEL_C12_L20,CEL_C12_L19,0.5,0,True
+EXT07,Acesso Blocos H/F/J,CEL_C37_L20,CEL_C37_L19,0.5,0,True
+EXT08,Acesso Cantina,CEL_C29_L14,CEL_C29_L14,0.0,0,True
+BB01,Biblioteca,CEL_C14_L06,CEL_C14_L06,0.0,0,True
+CDA01,Central de Atendimento,CEL_C35_L06,CEL_C35_L06,0.0,0,True
+H01,Bloco H,CEL_C29_L25,CEL_C29_L25,0.0,0,True
+F01,Bloco F,CEL_C37_L25,CEL_C37_L25,0.0,0,True
+J01,Bloco J,CEL_C45_L25,CEL_C45_L25,0.0,0,True
+E01,Bloco E,CEL_C14_L14,CEL_C14_L14,0.0,0,True
+D01,Bloco D,CEL_C20_L25,CEL_C20_L25,0.0,0,True
+C01,Bloco C,CEL_C12_L25,CEL_C12_L25,0.0,0,True
+B01,Bloco B,CEL_C04_L25,CEL_C04_L25,0.0,0,True
+CAN01,Cantina,CEL_C35_L14,CEL_C35_L14,0.0,0,True
