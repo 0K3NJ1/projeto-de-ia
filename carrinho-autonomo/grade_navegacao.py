@@ -9,7 +9,7 @@ import math
 from dataclasses import dataclass
 
 import campus_config as cfg
-from gerar_campus import validar
+from gerar_campus import validar, restricoes_circulacao
 
 
 @dataclass(frozen=True)
@@ -44,7 +44,8 @@ def segmento_intercepta_retangulo(a, b, limites):
 class Grade:
     def __init__(self, config=cfg):
         self.config = config
-        self.caixas = validar(config)
+        self.caixas_fisicas = validar(config)
+        self.caixas = self.caixas_fisicas + restricoes_circulacao(config)
         self.passo = config.grade["passo"]
         if not math.isfinite(self.passo) or self.passo <= 0:
             raise ValueError("Passo da grade deve ser positivo e finito")

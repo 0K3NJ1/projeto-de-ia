@@ -1,0 +1,9 @@
+# Ferramentas para os notebooks, gráficos e PDF do projeto no Zorin OS 18.1.
+# O módulo `controller` é fornecido pelo Webots; não deve vir do PyPI.
+-r requirements-dev.txt
+numpy>=1.26,<3
+pandas>=2.2,<3
+scikit-learn>=1.5,<2
+jupyterlab>=4,<5
+ipykernel>=6,<8
+reportlab>=4,<5

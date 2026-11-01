@@ -19,9 +19,22 @@ HTML = ROOT / "entrega_peas" / "Canvas_PEAS_Carrinho_IESB.html"
 RED = "#C8102E"
 INK = "#20252B"
 MUTED = "#59616A"
-FONT_DIR = Path("C:/Windows/Fonts")
-pdfmetrics.registerFont(TTFont("Arial", str(FONT_DIR / "arial.ttf")))
-pdfmetrics.registerFont(TTFont("Arial-Bold", str(FONT_DIR / "arialbd.ttf")))
+FONT_CANDIDATES = (
+    (Path("C:/Windows/Fonts/arial.ttf"), Path("C:/Windows/Fonts/arialbd.ttf")),
+    (Path("/usr/share/fonts/truetype/croscore/Arimo-Regular.ttf"),
+     Path("/usr/share/fonts/truetype/croscore/Arimo-Bold.ttf")),
+    (Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"),
+     Path("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")),
+)
+FONT_REGULAR, FONT_BOLD = next(
+    ((regular, bold) for regular, bold in FONT_CANDIDATES
+     if regular.is_file() and bold.is_file()),
+    (None, None),
+)
+if FONT_REGULAR is None:
+    raise FileNotFoundError("Nenhuma fonte compatível encontrada para gerar o PDF PEAS")
+pdfmetrics.registerFont(TTFont("Arial", str(FONT_REGULAR)))
+pdfmetrics.registerFont(TTFont("Arial-Bold", str(FONT_BOLD)))
 pdfmetrics.registerFontFamily("Arial", normal="Arial", bold="Arial-Bold")
 
 TITLE = "PEAS"
@@ -54,9 +67,9 @@ CARDS = [
     ], "Dados do modelo não são medições de sensores físicos."),
 ]
 AUTHORS = [
-    ("Arthur de Oliveira Borges", "2512130009"),
-    ("Izaias Lopes", "2512082018"),
-    ("Leonardo Alencar", "2512082039"),
+    ("Integrante 1", "PREENCHER"),
+    ("Integrante 2", "PREENCHER"),
+    ("Integrante 3", "PREENCHER"),
 ]
 NOW = "Carrinho manual, cenário provisório e 18 pontos de referência."
 NEXT = "Grafo, busca de rotas e integração com os motores."

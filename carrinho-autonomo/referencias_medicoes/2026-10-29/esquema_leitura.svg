@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1120" viewBox="0 0 1000 1120">
+<rect width="1000" height="1120" fill="#f6f4ef"/>
+<style>text{font-family:Arial,sans-serif;fill:#223746} .head{font-size:27px;font-weight:bold}.label{font-size:19px;font-weight:bold}.small{font-size:16px}.note{font-size:15px;fill:#566775}.area{fill:#dee8ed;stroke:#647e8d;stroke-width:2}.blocked{fill:#f0ded8;stroke:#ad6252;stroke-width:2}.path{fill:none;stroke:#7289a1;stroke-width:10;stroke-linejoin:round}.dim{fill:none;stroke:#357864;stroke-width:2}.step{stroke:#b44732;stroke-width:5}</style>
+<text x="50" y="48" class="head">IESB · leitura das referências</text>
+<text x="50" y="78" class="note">Esquema de conexões — sem escala. Topo do croqui não implica norte.</text>
+<path d="M450 155V930" fill="none" stroke="#deb22d" stroke-width="14"/>
+<text x="397" y="135" class="label">ENTRADA</text>
+<text x="468" y="915" class="small">210 m</text>
+<rect x="70" y="200" width="300" height="260" rx="5" class="blocked"/>
+<text x="95" y="235" class="label">PÁTIO / DIREITO</text>
+<text x="95" y="267" class="small">Sala dos Professores</text>
+<text x="95" y="294" class="small">Gastro e outros contornos</text>
+<text x="95" y="333" class="note">53 m longitudinal</text>
+<text x="95" y="360" class="note">55 m até o eixo central</text>
+<text x="95" y="418" class="note">Acesso por escada indicado</text>
+<path d="M380 335L438 335M385 320V350M399 320V350M413 320V350M427 320V350" class="step"/>
+<rect x="535" y="340" width="155" height="190" rx="5" class="area"/>
+<text x="566" y="378" class="label">CINEMA</text>
+<text x="571" y="407" class="small">20 × 40 m</text>
+<text x="557" y="488" class="note">WC · anexo Creche</text>
+<text x="536" y="321" class="note">Escada / bicicletário</text>
+<rect x="735" y="160" width="190" height="270" rx="5" class="area"/>
+<text x="751" y="206" class="label">BIBLIOTECA</text>
+<text x="753" y="390" class="label">ATENDIMENTO</text>
+<text x="775" y="302" class="small">18 × 43 m</text>
+<path d="M950 200V455H720V560H450" class="path"/>
+<text x="820" y="484" class="small">21 m</text>
+<text x="732" y="527" class="note">46 m?</text>
+<text x="560" y="583" class="small">41 m</text>
+<text x="956" y="330" class="note" transform="rotate(90 956 330)">42 m?</text>
+<rect x="70" y="525" width="300" height="90" rx="5" class="blocked"/>
+<text x="100" y="560" class="label">DESIGN · 40 × 20 m</text>
+<text x="100" y="589" class="small">Percurso anotado: 50 m</text>
+<path d="M380 568H438M385 552V585M399 552V585M413 552V585M427 552V585" class="step"/>
+<rect x="70" y="680" width="300" height="85" rx="5" class="blocked"/>
+<text x="100" y="714" class="label">BLOCO C</text>
+<text x="100" y="744" class="small">Percurso anotado: 50 m</text>
+<path d="M380 723H438M385 707V740M399 707V740M413 707V740M427 707V740" class="step"/>
+<rect x="70" y="825" width="300" height="85" rx="5" class="blocked"/>
+<text x="100" y="858" class="label">BLOCO B</text>
+<text x="100" y="888" class="small">Percurso anotado: 50 m</text>
+<path d="M380 867H438M385 851V884M399 851V884M413 851V884M427 851V884" class="step"/>
+<rect x="565" y="610" width="255" height="290" rx="5" class="area"/>
+<text x="587" y="650" class="label">BLOCOS I? / J?</text>
+<path d="M695 670V860M450 723H695" class="path"/>
+<text x="492" y="711" class="small">15 m</text>
+<text x="710" y="804" class="small">60 m</text>
+<text x="831" y="790" class="small">75 m</text>
+<text x="50" y="989" class="small">Vermelho: escadas sem rampa — acesso bloqueado para o carrinho.</text>
+<text x="50" y="1020" class="small">Azul: percursos do croqui. Larguras e posições dos ramais ainda aproximadas.</text>
+<text x="50" y="1051" class="small">“?”: leitura pendente. A foto aérea complementa a disposição, não prova acessibilidade.</text>
+<text x="50" y="1082" class="note">Referência: croqui do usuário, 29/10/2026. Não é levantamento arquitetônico.</text>
+</svg>

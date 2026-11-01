@@ -1,5 +1,10 @@
 # Projeto de Inteligência Artificial — IESB 2026/2
 
+> **Atualização de 01/11/2026:** para baixar e executar em outro computador, leia
+> o [guia para o grupo](carrinho-autonomo/GUIA_PARA_O_GRUPO.md).
+> O mundo atual está funcional; a adaptação ao croqui medido ainda está em preparação.
+> As referências e o progresso dessa adaptação também estão incluídos.
+
 **Centro Universitário IESB — Campus Asa Sul**  
 **Disciplina:** Inteligência Artificial (MDC050)  
 **Professor:** Rodrigo Gonçalves Pinto  
@@ -36,7 +41,7 @@ projeto-de-ia/
     ├── protos/                   # Modelo 3D físico do robô (Carrinho diferencial com sensores)
     ├── controllers/              # Controladores em Python para o Webots (manual, buscas e testes)
     ├── worlds/                   # Mundos de simulação Webots R2025a
-    ├── tests/                    # 39 testes unitários automatizados (100% aprovados)
+    ├── tests/                    # 42 testes unitários automatizados
     ├── colab/                    # Pacote oficial e notebook para execução no Google Colab
     ├── entrega_peas/             # Formulação PEAS e canvas do agente
     ├── output/                   # Relatórios visuais HTML, CSVs e métricas de desempenho

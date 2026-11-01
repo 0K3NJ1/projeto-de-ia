@@ -1,5 +1,11 @@
 # Carrinho IESB — Webots e Python
 
+**Neste Zorin OS 18.1:** comece por [INICIO_AQUI_LINUX.md](INICIO_AQUI_LINUX.md)
+e [CONFIGURACAO_ZORIN.md](CONFIGURACAO_ZORIN.md). O comando
+`./iniciar_webots.sh` abre o mundo interativo com o Python e as bibliotecas
+configurados para este computador. As instruções antigas do Windows abaixo
+foram mantidas como registro histórico.
+
 **21/10/2026 — blocos ampliados:** abra `worlds/etapa3_buscas.wbt` (interativo).
 T → **Bloco H** → Enter → Enter → G leva ao centro do bloco. Também pode usar
 T e clicar dentro dele. Todos os dez interiores têm acesso; carrinho mantido
@@ -89,30 +95,15 @@ teclas pela janela gráfica deve ser conferida pelo teste manual acima.
 
 ## Python neste computador
 
-Foi encontrado Webots R2025a, mas nenhum `python` no PATH da sessão. Para esta
-etapa, os dois `runtime.ini` locais apontam para o Python 3.12.14 disponível em:
+No Zorin OS 18.1, os sete `runtime.ini` apontam para
+`/home/arthur/Documentos/Faculdade/IA-PROJETO/.venv/bin/python`. O ambiente
+isolado contém as bibliotecas listadas em `requirements-linux.txt`; o Webots
+R2025a está em `/home/arthur/.local/opt/webots-R2025a`. Veja os comandos e as
+verificações em [CONFIGURACAO_ZORIN.md](CONFIGURACAO_ZORIN.md).
 
-```text
-C:/Users/cleom/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
-```
-
-Nenhuma biblioteca adicional precisa ser instalada. O módulo `controller` é
-fornecido pelo Webots quando ele inicia o controlador. Portanto, não execute o
-controlador diretamente com `python carrinho_manual.py` nem instale um pacote
-chamado `controller` pelo pip.
-
-Esse caminho é específico deste computador e pode mudar com o ambiente do
-Codex. Para usar outro Python, edite os dois `runtime.ini`:
-
-```ini
-[python]
-COMMAND = C:/caminho/para/python.exe
-```
-
-Em outro computador, crie esses arquivos ou configure **Tools → Preferences →
-General → Python command** no Webots. Os arquivos `runtime.ini` têm prioridade
-sobre essa preferência. Os mundos e o PROTO usam caminhos relativos e não
-dependem de modelos baixados da internet.
+O módulo `controller` é fornecido pelo Webots quando ele inicia um controlador.
+Não execute `carrinho_manual.py` diretamente nem instale um pacote chamado
+`controller` pelo pip. Os mundos e o PROTO usam caminhos relativos.
 
 ## Como os movimentos funcionam
 

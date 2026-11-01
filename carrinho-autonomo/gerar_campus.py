@@ -30,15 +30,23 @@ def caixas_cenario(config=cfg):
     xa, xb, ya, yb = (p[k] for k in ("x_min", "x_max", "y_min", "y_max"))
     entrada_x, entrada_l = config.entrada["centro_x"], config.entrada["largura"]
     if not (0 < entrada_l and xa < entrada_x - entrada_l/2 < entrada_x + entrada_l/2 < xb):
-        raise ValueError("A entrada deve caber na borda sul do piso")
-    parede("LIMITE_N", True, yb-t/2, xa, xb)
+        raise ValueError("A entrada deve caber na borda do piso")
+    lado_entrada = config.entrada.get("lado", "S")
+    if lado_entrada not in ("N", "S"):
+        raise ValueError("Lado da entrada deve ser N ou S")
+    fechado, aberto = (yb-t/2, ya+t/2) if lado_entrada == "S" else (ya+t/2, yb-t/2)
+    parede("LIMITE_"+("N" if lado_entrada == "S" else "S"), True, fechado, xa, xb)
     parede("LIMITE_O", False, xa+t/2, ya, yb)
     parede("LIMITE_L", False, xb-t/2, ya, yb)
-    parede("LIMITE_S_O", True, ya+t/2, xa, entrada_x-entrada_l/2)
-    parede("LIMITE_S_L", True, ya+t/2, entrada_x+entrada_l/2, xb)
+    parede(f"LIMITE_{lado_entrada}_O", True, aberto, xa, entrada_x-entrada_l/2)
+    parede(f"LIMITE_{lado_entrada}_L", True, aberto, entrada_x+entrada_l/2, xb)
     for s in config.setores:
         x, y = s["centro"]
         w, d = s["tamanho"]
+        if s.get("porta") is None:
+            # Volume sem interior mapeado: não inventa porta nem acesso transitável.
+            caixa(s["id"]+"_VOLUME", (x, y), (w, d, s.get("altura", h)))
+            continue
         lado_porta, largura, offset = s["porta"]
         if lado_porta not in ("N", "S", "L", "O") or min(w, d) <= 2*t:
             raise ValueError(f"Setor inválido: {s['id']}")
@@ -60,6 +68,58 @@ def caixas_cenario(config=cfg):
     caixas.extend(config.paredes)
     caixas.extend(config.blocos)
     return caixas
+
+
+def restricoes_circulacao(config=cfg):
+    """Complemento exato da união de faixas mapeadas; não são paredes físicas.
+
+    Particiona nas bordas dos retângulos e une intervalos adjacentes. As caixas
+    resultantes impedem atalhos por gramados/interiores sem acesso documentado.
+    A grade e o seguidor expandem estas caixas pelas mesmas margens do robô.
+    """
+    faixas = getattr(config, "circulacao", None)
+    if faixas is None:
+        return []  # Compatibilidade com configurações de ensaio anteriores.
+    if not faixas:
+        raise ValueError("Circulação mapeada não pode ser vazia")
+    p = config.piso
+    xs, ys = {p["x_min"], p["x_max"]}, {p["y_min"], p["y_max"]}
+    limites = []
+    for faixa in faixas:
+        xa, xb, ya, yb = faixa["limites"]
+        if not all(math.isfinite(v) for v in (xa, xb, ya, yb)) or not (
+                p["x_min"] <= xa < xb <= p["x_max"] and
+                p["y_min"] <= ya < yb <= p["y_max"]):
+            raise ValueError("Faixa de circulação inválida: " + faixa["id"])
+        xs.update((xa, xb)); ys.update((ya, yb))
+        limites.append((xa, xb, ya, yb))
+    xs, ys = sorted(xs), sorted(ys)
+    retangulos, ativos = [], {}
+    for ya, yb in zip(ys, ys[1:]):
+        runs, inicio = [], None
+        for xa, xb in zip(xs, xs[1:]):
+            x, y = (xa+xb)/2, (ya+yb)/2
+            livre = any(a < x < b and c < y < d for a,b,c,d in limites)
+            if not livre and inicio is None:
+                inicio = xa
+            if livre and inicio is not None:
+                runs.append((inicio, xa)); inicio = None
+        if inicio is not None:
+            runs.append((inicio, xs[-1]))
+        novos = {}
+        for xa, xb in runs:
+            chave = (xa, xb)
+            if chave in ativos:
+                rect = ativos[chave]
+                rect[3] = yb
+            else:
+                rect = [xa, xb, ya, yb]
+                retangulos.append(rect)
+            novos[chave] = rect
+        ativos = novos
+    return [{"id": f"SEM_ACESSO_MAPEADO_{i:02d}",
+             "centro": ((a+b)/2, (c+d)/2), "tamanho": (b-a, d-c, .01)}
+            for i, (a,b,c,d) in enumerate(retangulos)]
 
 
 def validar(config=cfg):

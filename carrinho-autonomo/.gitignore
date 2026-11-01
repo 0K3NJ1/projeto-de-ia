@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+test-results/
+controllers/*/runtime.ini
+.cache/
+
+# Arquivos locais e cópias de segurança
+backups/
+historico_codex/
+*.wbproj
+.env
+.env.*
+!.env.example
+.agents/
+.codex/
+.aws/
