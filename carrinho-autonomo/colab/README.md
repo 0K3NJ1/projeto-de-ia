@@ -1,5 +1,30 @@
 # Carrinho IESB no Colab — grade e buscas
 
+## Novo: A* + Qwen com código comentado (01/11/2026)
+
+Abra `Carrinho_IESB_Rotas_Comentado.ipynb` no Colab. Ele contém a primeira
+integração dos Labs 2 e 7: nomes dos locais → A* → explicação pelo Qwen.
+Execute em ordem; altere `origem` e `destino` na seção 5. Para o Qwen, selecione
+GPU antes de começar. O download do modelo requer internet e alguns GB;
+o planejamento pode ser executado sem GPU e sem baixar o modelo.
+
+O código novo está explicado em `rotas_comentadas.py` e aparece inteiro nas
+células didáticas. O notebook incorpora apenas os cinco módulos necessários ao
+planejamento em uma pasta temporária. Não usa o ZIP antigo nem altera o Webots.
+Usa o mapa antigo de 50 × 30 m, não o croqui medido. O resultado do Python fica
+visível para conferir possíveis erros no texto produzido pelo Qwen.
+
+Para regenerar após mudar o código: `python3 colab/preparar_rotas_comentadas.py`.
+A regeneração captura os módulos atuais, inclusive o mapa; confira a geometria
+antes de gerar uma nova cópia. Os hashes das fontes ficam nos metadados do notebook.
+
+Esta etapa ainda não interpreta pedidos livres, não implementa ferramentas dos
+Labs 8/9 e não prevê tempo de viagem. Ela também não movimenta o carrinho.
+Validação local registrada em `VALIDACAO_ROTAS_COMENTADAS.md`; a geração real com
+Qwen e uma sessão nova na nuvem do Colab ainda precisam ser verificadas.
+
+## Pacote anterior: buscas e navegação
+
 **21/10/2026:** pacote ampliado, com dez destinos centrais internos. Bloco H/H01
 fica dentro do H. Veja `CAMPUS_INTERIORES.md`; os IDs antigos de células mudaram
 de posição com o aumento do piso. As cinco buscas e o carrinho foram preservados.
