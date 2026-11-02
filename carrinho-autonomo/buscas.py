@@ -1,7 +1,5 @@
 """Buscas adaptadas do Laboratório 2 do Prof. Rodrigo Gonçalves Pinto.
 
-Gerado por adaptar_laborator
-io2.py. O anexo original permanece intacto.
 Mapa: dicionário de dicionários, com custos finitos e não negativos.
 A* mantém o conjunto fechado didático: requer heurística CONSISTENTE.
 Manhattan em grade de quatro vizinhos satisfaz essa condição.

@@ -18,6 +18,8 @@ import campus_config as cfg
 from grade_navegacao import Grade
 from planejamento import ALGORITMOS, planejar, resolver_alvo, alvo_do_clique
 from navegacao import Seguidor
+# Explicação da rota pelo Qwen, em OUTRO processo (não trava a simulação).
+from explicador_qwen import ExplicadorQwen, mensagens_da_rota
 
 
 def marca(ident, ponto, cor, raio=.16, z=.027, transparencia=0):
@@ -42,7 +44,9 @@ def trecho(a, b, cor="0.85 0.035 0.12", z=.026):
 
 
 class PainelBusca:
-    def __init__(self, robot):
+    def __init__(self, robot, explicar=False):
+        # explicar=True só no uso interativo (main). Os ensaios automáticos
+        # criam o painel sem o Qwen, para medir apenas busca e movimento.
         self.robot = robot
         self.passo = int(robot.getBasicTimeStep())
         self.robo = robot.getSelf()
@@ -73,6 +77,17 @@ class PainelBusca:
             robot.getRoot().getField("children").importMFNodeFromString(-1, "DEF VISUAL_BUSCA Group { children [] }")
             self.grupo = robot.getFromDef("VISUAL_BUSCA")
         self.children = self.grupo.getField("children")
+        # Cada rota calculada recebe um número. Quando a rota é invalidada
+        # (T, O, espaço, troca de algoritmo ou nova busca), o número muda e
+        # qualquer explicação atrasada da rota anterior é descartada.
+        self.numero_rota = 0
+        self.explicador = None
+        if explicar:
+            # Inicia o carregamento do modelo agora, em paralelo: enquanto
+            # o usuário escolhe o destino, o Qwen já vai sendo preparado.
+            self.explicador = ExplicadorQwen()
+            self.explicador.iniciar()
+            print("QWEN: carregando o modelo em outro processo; buscas e teclas já funcionam.", flush=True)
         # O mundo pode ter sido salvo durante uma busca anterior. Os desenhos
         # temporários precisam acompanhar o estado novo do controlador.
         self.limpar()
@@ -88,6 +103,8 @@ class PainelBusca:
         self.resultado = None
         self.indice = 0
         self.reproduzindo = False
+        # A rota anterior deixou de valer: sua explicação também.
+        self.numero_rota += 1
 
     def selecionar(self, texto, origem=False):
         self.limpar()
@@ -124,6 +141,44 @@ class PainelBusca:
         self.mensagem = "Reproduzindo a ordem real das expansões."
         self.atualizar_painel()
         print(json.dumps({k: r[k] for k in ("algoritmo", "origem", "destino", "custo_m", "expandidos", "tempo_ms")}, ensure_ascii=False), flush=True)
+        self.pedir_explicacao()
+
+    def pedir_explicacao(self):
+        """Envia ao Qwen o resultado que ACABOU de ser calculado. Não espera a resposta."""
+        if self.explicador is None:
+            return
+        if self.resultado["caminho"] is None:
+            print("QWEN: sem rota; não há o que explicar.", flush=True)
+            return
+        # Mesmo prompt do notebook (colab/rotas_comentadas.py), com os dados
+        # efetivamente calculados aqui: posição real do carrinho, destino e A*.
+        mensagens = mensagens_da_rota(self.grade, self.resultado)
+        if self.explicador.pedir(self.numero_rota, mensagens):
+            print(f"QWEN: explicando a rota #{self.numero_rota}. G continua disponível para iniciar.", flush=True)
+        else:
+            print(f"QWEN indisponível ({self.explicador.erro}). Buscas e movimento continuam.", flush=True)
+
+    def ler_explicacoes(self):
+        """Olha rapidamente se o Qwen respondeu. Chamado a cada passo; nunca espera."""
+        if self.explicador is None:
+            return
+        for mensagem in self.explicador.respostas():
+            tipo = mensagem["tipo"]
+            if tipo == "pronto":
+                print(f"QWEN: modelo pronto ({mensagem['dispositivo']}).", flush=True)
+            elif tipo in ("falha_carregamento", "encerrado"):
+                print(f"QWEN indisponível: {self.explicador.erro}. Buscas e movimento continuam."
+                      " Detalhes em .cache/servidor_qwen.log", flush=True)
+            elif mensagem.get("id") != self.numero_rota or self.resultado is None:
+                # A rota mudou enquanto o modelo escrevia: texto antigo é descartado.
+                print(f"QWEN: explicação da rota #{mensagem.get('id')} descartada (rota mudou).", flush=True)
+            elif tipo == "erro":
+                print(f"QWEN: falha ao explicar a rota #{mensagem['id']}: {mensagem['erro']}", flush=True)
+            else:
+                print(f"\n===== EXPLICAÇÃO DO QWEN — rota #{mensagem['id']} ({mensagem['segundos']:.1f} s) =====\n"
+                      f"{mensagem['texto']}\n"
+                      f"(Texto gerado pelo modelo. Referência: {self.resultado['percurso_total_m']:.2f} m"
+                      f" calculados pelo {self.resultado['algoritmo']}. Confira; G inicia o movimento.)\n", flush=True)
 
     def avancar(self, quantidade=1):
         if self.resultado is None:
@@ -170,6 +225,8 @@ class PainelBusca:
                 linhas += [f"Último: {r['ordem'][self.indice-1]}"]
         linhas += ["G: iniciar | C: pausar/retomar", "Espaço: parar e invalidar rota",
                    f"Movimento: {self.seguidor.estado}", f"Deslocamento: {self.seguidor.tempo_s:.1f} s (sem pausas)"]
+        if self.explicador is not None:
+            linhas += [f"Qwen: {self.explicador.descricao()} (texto no console)"]
         if self.edicao:
             linhas += ["", f"Selecionando {self.edicao.upper()}:", self.texto+"_", "Enter confirma | Q cancela"]
         # Um rótulo por linha evita recortes da textura de textos multilinha
@@ -266,6 +323,8 @@ class PainelBusca:
             self.atualizar_painel()
 
     def atualizar(self, ler_entrada=True):
+        # Respostas do Qwen são lidas sem esperar, antes das teclas.
+        self.ler_explicacoes()
         # Ensaios automáticos não devem receber teclas/cliques da janela.
         if not ler_entrada:
             self.atualizar_movimento()
@@ -298,9 +357,15 @@ class PainelBusca:
 
 def main():
     robot = Supervisor()
-    painel = PainelBusca(robot)
-    while robot.step(painel.passo) != -1:
-        painel.atualizar()
+    # Uso interativo: com explicação do Qwen no console.
+    painel = PainelBusca(robot, explicar=True)
+    try:
+        while robot.step(painel.passo) != -1:
+            painel.atualizar()
+    finally:
+        # Ao fechar a simulação, encerra também o programa do modelo.
+        if painel.explicador is not None:
+            painel.explicador.encerrar()
 
 
 if __name__ == "__main__":

@@ -11,8 +11,8 @@ Atualizado em 27/10/2026 para este computador. As evidências desta máquina fic
 
 ## Webots
 
-- Webots **R2025a** instalado para este usuário em `/home/arthur/.local/opt/webots-R2025a`.
-- Comando `webots` disponível por `/home/arthur/.local/bin/webots`; o menu do sistema também recebeu o atalho criado pelo instalador oficial.
+- Webots **R2025a** instalado para este usuário em `$HOME/.local/opt/webots-R2025a`.
+- Comando `webots` disponível por `$HOME/.local/bin/webots`; o menu do sistema também recebeu o atalho criado pelo instalador oficial.
 - O pacote oficial para Ubuntu 22.04/24.04 veio da [versão R2025a da Cyberbotics](https://github.com/cyberbotics/webots/releases/tag/R2025a). Foi verificado por tamanho, teste bzip2 e inspeção dos caminhos do arquivo antes da instalação.
 - A biblioteca `libsndio.so.7`, ausente no Zorin, veio do pacote `libsndio7.0` do repositório Ubuntu Noble configurado neste computador. Ela foi colocada apenas nas bibliotecas locais do Webots, sem instalação global.
 - Os sete `controllers/*/runtime.ini` agora apontam para o Python do `.venv` deste projeto, substituindo o caminho `C:/.../python.exe` do Windows. A [documentação do Webots](https://github.com/cyberbotics/webots/blob/R2025a/docs/guide/using-python.md) prevê essa configuração por controlador.
@@ -27,7 +27,7 @@ No mundo `etapa3_buscas.wbt`, clique na cena 3D. Para ir ao Bloco H: **T**, digi
 
 ## Python e notebooks
 
-O ambiente isolado está em `.venv/` e usa Python 3.12.3 com pip 26.2.2. As bibliotecas diretas instaladas são NumPy 2.5.4, pandas 2.3.3, scikit-learn 1.9.1, Matplotlib 3.11.2, Pillow 12.3.0, ReportLab 4.5.1, JupyterLab 4.6.4 e ipykernel 7.4.0. `requirements-linux.txt` registra as dependências diretas; `requirements-linux.lock.txt` registra todas as versões instaladas.
+O ambiente isolado está em `.venv/` e usa Python 3.12.3 com pip 26.2.2. As bibliotecas diretas instaladas são NumPy 2.5.4, pandas 2.3.3, scikit-learn 1.9.1, Matplotlib 3.11.2, Pillow 12.3.0, ReportLab 4.5.1, JupyterLab 4.6.4, ipykernel 7.4.0, PyTorch 2.15.0 (com suporte CUDA) e Transformers 4.57.6. `requirements-linux.txt` registra as dependências diretas; `requirements-linux.lock.txt` registra todas as versões instaladas.
 
 Para abrir os notebooks locais:
 

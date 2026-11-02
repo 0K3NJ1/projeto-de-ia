@@ -20,6 +20,9 @@ O mundo `etapa2_campus.wbt` continua disponível para dirigir manualmente.
    Ao terminar, a rota aparece em vermelho.
 7. Para percorrer a rota, aperte **G**. **C** pausa/retoma o movimento;
    **espaço** para e invalida a rota. Sem G, é possível apenas visualizar a busca.
+8. Ao calcular a rota com Enter, o modelo **Qwen2.5-1.5B-Instruct** é acionado em
+   segundo plano e imprime no console a explicação em português dos dados calculados,
+   sem travar a simulação nem bloquear o comando G.
 
 Alternativa ao passo 3: depois de **T**, clique no piso dentro do quadrado desejado.
 Dentro de um bloco, o clique escolhe seu centro; fora, escolhe a célula.
