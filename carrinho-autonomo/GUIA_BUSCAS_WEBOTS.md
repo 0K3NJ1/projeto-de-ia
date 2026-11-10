@@ -4,6 +4,8 @@ Abra **File → Open World** e selecione `worlds/etapa3_buscas.wbt`.
 **Não use `_teste.wbt` para uso interativo:** são ensaios automáticos.
 **21/10/2026:** blocos ampliados, com destinos no centro dos interiores.
 Novas medidas e destinos em `CAMPUS_INTERIORES.md`.
+Para registrar o resultado de cada algoritmo, abra
+`validacao_buscas/FORMULARIO_BUSCAS.html` e siga `validacao_buscas/LEIA_ME.md`.
 É o campus completo com os quadrados, IDs e um painel de busca na própria cena.
 Inicie a simulação em **Real-time** e clique na área 3D para ela receber o teclado.
 O mundo `etapa2_campus.wbt` continua disponível para dirigir manualmente.

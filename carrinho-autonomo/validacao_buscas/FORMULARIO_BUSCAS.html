@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Validação das cinco buscas — Carrinho IESB</title>
+  <style>
+    :root { color-scheme: light; --ink:#203047; --muted:#58677a; --line:#d9e2ec; --paper:#fff; --bg:#f3f6fa; --blue:#0d5d99; --good:#1a704c; --bad:#a63131; --warn:#8a5b0d; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 system-ui, sans-serif; }
+    main { max-width:1180px; margin:auto; padding:28px 18px 70px; }
+    h1 { margin:0 0 8px; font-size:clamp(1.7rem,3vw,2.4rem); }
+    h2 { margin:0 0 10px; font-size:1.35rem; }
+    h3 { margin:0 0 10px; font-size:1.08rem; }
+    p { margin:8px 0; }
+    .lead { color:var(--muted); max-width:76ch; }
+    .card { background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:20px; margin:18px 0; box-shadow:0 2px 8px #20304709; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:14px; }
+    label { display:block; font-weight:650; }
+    label small { display:block; font-weight:400; color:var(--muted); margin:3px 0 5px; }
+    input,select,textarea,button { font:inherit; }
+    input:not([type=file]),select,textarea { width:100%; padding:9px 10px; border:1px solid #aebdcc; border-radius:8px; background:#fff; color:var(--ink); }
+    textarea { min-height:72px; resize:vertical; }
+    input:focus,select:focus,textarea:focus,button:focus-visible { outline:3px solid #8bc7f3; outline-offset:2px; }
+    .note { border-left:4px solid #83b7dd; background:#edf6fc; padding:10px 14px; border-radius:5px; }
+    .warning { border-left-color:#d3a248; background:#fff7e8; }
+    .actions { display:flex; flex-wrap:wrap; gap:9px; margin:14px 0; }
+    button,.download { border:1px solid var(--blue); border-radius:8px; color:#fff; background:var(--blue); padding:9px 13px; cursor:pointer; font-weight:650; }
+    button.secondary,.download { background:#fff; color:var(--blue); }
+    button.danger { border-color:var(--bad); color:var(--bad); background:#fff; }
+    .download { display:inline-block; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; min-width:930px; }
+    th,td { text-align:left; border-bottom:1px solid var(--line); padding:9px 7px; vertical-align:top; }
+    th { background:#edf2f7; font-size:.87rem; }
+    td:first-child { min-width:125px; font-weight:650; }
+    td input[type=number] { min-width:82px; }
+    td select { min-width:105px; }
+    td .detail { min-width:160px; }
+    .ref { white-space:nowrap; color:var(--muted); font-size:.88rem; }
+    .status { font-weight:700; white-space:nowrap; }
+    .ok { color:var(--good); }
+    .bad { color:var(--bad); }
+    .pending { color:var(--muted); }
+    .review { color:var(--warn); }
+    details { margin-top:8px; }
+    summary { cursor:pointer; color:var(--blue); font-weight:650; }
+    .map-head { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:baseline; }
+    .small { font-size:.88rem; color:var(--muted); }
+    .count { display:inline-block; background:#e4eef6; border-radius:999px; padding:6px 12px; font-weight:650; }
+    footer { color:var(--muted); font-size:.88rem; }
+    @media print { .actions,.download,details summary { display:none; } body { background:#fff; } .card { box-shadow:none; break-inside:avoid; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Validação das cinco buscas</h1>
+    <p class="lead">Preencham o que <strong>apareceu de fato</strong> no Colab, Python ou Webots. Os números esperados são uma referência para o mapa provisório atual. Ao terminar, baixem o JSON e enviem o arquivo nesta conversa para analisarmos cada divergência.</p>
+    <p class="count" id="progresso" aria-live="polite">0 de 20 verificações preenchidas</p>
+  </header>
+
+  <section class="card" aria-labelledby="como-usar">
+    <h2 id="como-usar">Como preencher</h2>
+    <ol>
+      <li>Registrem o ambiente e quem fez o teste.</li>
+      <li>Nos três mapas, comparem as cinco buscas usando os pares indicados. Copiem custo <em>da grade</em> e nós expandidos. O tempo medido é opcional.</li>
+      <li>No Webots, testem cada tecla de algoritmo no mundo interativo, sem apertar G antes de verificar se o carrinho ficou parado.</li>
+      <li>Cliquem em <strong>Baixar respostas (.json)</strong> e anexem o arquivo aqui. O navegador também tenta guardar o preenchimento neste computador.</li>
+    </ol>
+    <p class="note warning">Referência recalculada em Linux em 10/11/2026 com <code>experimentos_buscas.py</code> e o mapa de 50 × 30 m. Ela descreve <strong>esta versão do código</strong>, não é prova independente de correção. Os tempos variam entre máquinas e não entram no julgamento automático. Se alterarem mapa, origem ou destino, descrevam isso nas observações.</p>
+  </section>
+
+  <section class="card" aria-labelledby="identificacao">
+    <h2 id="identificacao">1. Identificação do ensaio</h2>
+    <div class="grid">
+      <label>Quem executou<input data-bind="meta.responsavel" placeholder="Nome ou iniciais"></label>
+      <label>Data do teste<input type="date" data-bind="meta.data"></label>
+      <label>Ambiente da comparação
+        <select data-bind="meta.ambiente"><option value="">Selecione</option><option>Google Colab</option><option>Python local Linux</option><option>Python local Windows</option><option>Outro</option></select>
+      </label>
+      <label>Notebook ou comando usado<input data-bind="meta.comando" placeholder="Ex.: Carrinho_IESB_Base.ipynb"></label>
+    </div>
+    <label style="margin-top:14px">Observações sobre versão, erros de instalação ou mudanças no mapa<textarea data-bind="meta.observacoes" placeholder="Inclua qualquer diferença nas condições do ensaio."></textarea></label>
+  </section>
+
+  <section id="comparacoes" aria-labelledby="titulo-comparacoes">
+    <h2 id="titulo-comparacoes">2. Comparação: três mapas × cinco algoritmos</h2>
+    <p class="small">“Confere” compara rota encontrada, custo, expansões e validade marcada por vocês. Caminhos diferentes podem ter o mesmo custo ótimo. A* e custo uniforme garantem o menor custo neste grafo; a largura também, pois cada aresta mede 1 m. Profundidade e gulosa podem produzir caminhos maiores.</p>
+    <div id="mapas"></div>
+  </section>
+
+  <section class="card" aria-labelledby="titulo-webots">
+    <h2 id="titulo-webots">3. Conferência visual no Webots</h2>
+    <p>Abra <code>worlds/etapa3_buscas.wbt</code> em Real-time. Para <strong>cada linha</strong>, clique na cena, pressione <strong>R</strong>, escolha <strong>T → Bloco H → Enter</strong>, pressione a tecla do algoritmo, depois <strong>Enter</strong> para calcular e <strong>F</strong> para mostrar o final. A origem esperada é EXT01; o destino é H01. <strong>Não pressione G</strong> nesta conferência das buscas.</p>
+    <p class="note">Esperado em todas: expansões em magenta, caminho em vermelho, carrinho parado antes de G. A navegação com motores é outro teste. A posição da busca usa a localização ideal do Supervisor, sem sensores de um carrinho físico. Custo e expansões são referências do início ideal em EXT01; pequenos deslocamentos da física podem alterar a célula inicial no Webots, então esses dois números não definem o status visual automático.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tecla / algoritmo</th><th>Expansões visíveis?</th><th>Rota vermelha?</th><th>Parado antes de G?</th><th>Custo visto (m)</th><th>Expansões vistas</th><th>Resultado</th><th>Detalhes</th></tr></thead>
+      <tbody id="webots-linhas"></tbody>
+    </table></div>
+  </section>
+
+  <section class="card" aria-labelledby="titulo-exportar">
+    <h2 id="titulo-exportar">4. Salvar e enviar</h2>
+    <p>O arquivo JSON contém respostas e referências, sem capturas de tela. Se houver imagens, enviem também os arquivos de imagem e escrevam seus nomes nas observações.</p>
+    <div class="actions">
+      <button type="button" id="baixar">Baixar respostas (.json)</button>
+      <label class="download">Importar respostas (.json)<input type="file" accept=".json,application/json" id="importar" hidden></label>
+      <button type="button" class="secondary" id="resumo">Gerar resumo para copiar</button>
+      <button type="button" class="danger" id="limpar">Limpar este formulário</button>
+    </div>
+    <p class="small" id="aviso-salvamento" aria-live="polite"></p>
+    <label>Resumo para copiar<textarea id="texto-resumo" readonly placeholder="Clique em Gerar resumo para copiar."></textarea></label>
+  </section>
+  <footer>Formulário local do Carrinho IESB. Dados só saem do navegador quando vocês baixam e compartilham o JSON.</footer>
+</main>
+<script>
+"use strict";
+
+// Estes valores vêm da execução local registrada em referencia_linux_2026-11-10.csv.
+// O tempo não é uma expectativa fixa porque depende do computador e da carga.
+const mapas = [
+  { id:"pequeno", nome:"Pequeno", origem:"EXT01", destino:"EXT04", nos:70, arestas:123,
+    buscas:[["Profundidade",1,64,64],["Largura",2,10,66],["Custo uniforme",3,10,66],["Gulosa",4,10,10],["A*",5,10,35]] },
+  { id:"medio", nome:"Médio", origem:"EXT01", destino:"CAN01", nos:468, arestas:774,
+    buscas:[["Profundidade",1,266,333],["Largura",2,24,386],["Custo uniforme",3,24,386],["Gulosa",4,24,79],["A*",5,24,130]] },
+  { id:"campus", nome:"Campus completo", origem:"EXT01", destino:"H01", nos:1090, arestas:1894,
+    buscas:[["Profundidade",1,467,911],["Largura",2,29,697],["Custo uniforme",3,29,697],["Gulosa",4,29,29],["A*",5,29,137]] }
+];
+const CHAVE = "carrinho_iesb_formulario_buscas_v1";
+const estadoInicial = () => ({ meta:{}, mapas:{}, casos:{}, webots:{} });
+let estado = estadoInicial();
+
+function obter(caminho) {
+  return caminho.split(".").reduce((obj,parte) => obj && obj[parte], estado);
+}
+function definir(caminho,valor) {
+  const partes = caminho.split(".");
+  let alvo = estado;
+  for (const parte of partes.slice(0,-1)) alvo = alvo[parte] ??= {};
+  alvo[partes.at(-1)] = valor;
+}
+function campo(caminho,tipo="text",extra="") {
+  return `<input type="${tipo}" data-bind="${caminho}" ${extra}>`;
+}
+function escolha(caminho,opcoes) {
+  return `<select data-bind="${caminho}"><option value="">Selecione</option>${opcoes.map(([v,t])=>`<option value="${v}">${t}</option>`).join("")}</select>`;
+}
+const simNao = [["sim","Sim"],["nao","Não"],["incerto","Não sei"]];
+
+function desenhar() {
+  const area = document.getElementById("mapas");
+  area.innerHTML = mapas.map(mapa => `<section class="card" aria-labelledby="mapa-${mapa.id}">
+    <div class="map-head"><h3 id="mapa-${mapa.id}">${mapa.nome}: ${mapa.origem} → ${mapa.destino}</h3><span class="small">Referência: ${mapa.nos} nós, ${mapa.arestas} arestas</span></div>
+    <div class="grid"><label>Nós observados <small>Se aparecer no resultado</small>${campo(`mapas.${mapa.id}.nos`,"number",'min="0" step="1"')}</label>
+    <label>Arestas observadas <small>Se aparecer no resultado</small>${campo(`mapas.${mapa.id}.arestas`,"number",'min="0" step="1"')}</label></div>
+    <div class="table-wrap"><table><thead><tr><th>Algoritmo</th><th>Esperado</th><th>Encontrou?</th><th>Custo observado (m)</th><th>Nós expandidos</th><th>Tempo (ms)</th><th>Caminho válido?</th><th>Resultado</th><th>Detalhes</th></tr></thead><tbody>
+    ${mapa.buscas.map(([alg,tecla,custo,exp],i) => {
+      const id=`${mapa.id}_${i}`, base=`casos.${id}`;
+      return `<tr><td>${alg}<br><span class="small">tecla ${tecla}</span></td>
+        <td class="ref">Sim<br>${custo} m<br>${exp} exp.</td>
+        <td>${escolha(`${base}.encontrou`,simNao)}</td>
+        <td>${campo(`${base}.custo`,"number",'min="0" step="any" inputmode="decimal"')}</td>
+        <td>${campo(`${base}.expandidos`,"number",'min="0" step="1"')}</td>
+        <td>${campo(`${base}.tempo`,"number",'min="0" step="any" inputmode="decimal"')}</td>
+        <td>${escolha(`${base}.valido`,simNao)}</td>
+        <td><span class="status pending" data-status="${id}">Pendente</span></td>
+        <td class="detail"><details><summary>Caminho e notas</summary><label class="small">Caminho/IDs${campo(`${base}.caminho`)}</label><label class="small">Print/observações<textarea data-bind="${base}.notas"></textarea></label></details></td></tr>`;
+    }).join("")}</tbody></table></div></section>`).join("");
+  const webots = document.getElementById("webots-linhas");
+  webots.innerHTML = mapas[2].buscas.map(([alg,tecla,custo,exp],i) => {
+    const base=`webots.${i}`;
+    return `<tr><td>${tecla} — ${alg}<br><span class="ref">${custo} m; ${exp} exp.</span></td>
+      <td>${escolha(`${base}.expansoes`,simNao)}</td><td>${escolha(`${base}.rota`,simNao)}</td>
+      <td>${escolha(`${base}.parado`,simNao)}</td>
+      <td>${campo(`${base}.custo`,"number",'min="0" step="any"')}</td>
+      <td>${campo(`${base}.expandidos`,"number",'min="0" step="1"')}</td>
+      <td><span class="status pending" data-status="webots_${i}">Pendente</span></td>
+      <td class="detail"><details><summary>Print e notas</summary><label class="small">Print/observações<textarea data-bind="${base}.notas"></textarea></label></details></td></tr>`;
+  }).join("");
+  document.querySelectorAll("[data-bind]").forEach(elemento => { elemento.value = obter(elemento.dataset.bind) ?? ""; });
+  atualizarStatus();
+}
+
+function numero(valor) { return valor !== "" && valor != null && Number.isFinite(Number(valor)) ? Number(valor) : null; }
+function resultadoCaso(mapa,i) {
+  const item=estado.casos[`${mapa.id}_${i}`] || {};
+  if (!item.encontrou) return ["Pendente","pending"];
+  if (item.encontrou==="incerto") return ["Revisar","review"];
+  if (item.encontrou==="nao") return ["Divergência","bad"];
+  if (numero(item.custo)===null || numero(item.expandidos)===null || !item.valido) return ["Pendente","pending"];
+  if (item.valido==="incerto") return ["Revisar","review"];
+  const mapaVisto=estado.mapas[mapa.id] || {};
+  if ((numero(mapaVisto.nos)!==null && numero(mapaVisto.nos)!==mapa.nos) ||
+      (numero(mapaVisto.arestas)!==null && numero(mapaVisto.arestas)!==mapa.arestas)) return ["Mapa diferente","review"];
+  const esperado=mapa.buscas[i];
+  const confere=item.valido==="sim" && Math.abs(Number(item.custo)-esperado[2])<0.001 && Number(item.expandidos)===esperado[3];
+  return confere ? ["Confere","ok"] : ["Divergência","bad"];
+}
+function resultadoWebots(i) {
+  const item=estado.webots[i] || {};
+  if (!item.expansoes || !item.rota || !item.parado) return ["Pendente","pending"];
+  if ([item.expansoes,item.rota,item.parado].includes("incerto")) return ["Revisar","review"];
+  const confere=item.expansoes==="sim" && item.rota==="sim" && item.parado==="sim";
+  return confere ? ["Confere","ok"] : ["Divergência","bad"];
+}
+function atualizarStatus() {
+  let preenchidas=0, divergencias=0;
+  for (const mapa of mapas) mapa.buscas.forEach((_,i) => {
+    const [rotulo,classe]=resultadoCaso(mapa,i), alvo=document.querySelector(`[data-status="${mapa.id}_${i}"]`);
+    alvo.textContent=rotulo; alvo.className=`status ${classe}`;
+    if (classe!=="pending") preenchidas++;
+    if (classe==="bad") divergencias++;
+  });
+  mapas[2].buscas.forEach((_,i) => {
+    const [rotulo,classe]=resultadoWebots(i), alvo=document.querySelector(`[data-status="webots_${i}"]`);
+    alvo.textContent=rotulo; alvo.className=`status ${classe}`;
+    if (classe!=="pending") preenchidas++;
+    if (classe==="bad") divergencias++;
+  });
+  document.getElementById("progresso").textContent=`${preenchidas} de 20 verificações preenchidas · ${divergencias} divergência(s)`;
+}
+function salvar() {
+  try { localStorage.setItem(CHAVE,JSON.stringify(estado)); document.getElementById("aviso-salvamento").textContent="Preenchimento guardado neste navegador. Baixe o JSON para ter uma cópia e enviar ao grupo."; }
+  catch { document.getElementById("aviso-salvamento").textContent="Este navegador não permitiu salvar automaticamente. Baixe o JSON antes de fechar."; }
+}
+function carregar() {
+  try { const salvo=JSON.parse(localStorage.getItem(CHAVE)); if (salvo && typeof salvo==="object") estado={...estadoInicial(),...salvo}; }
+  catch { /* Um registro inválido não impede abrir o formulário. */ }
+}
+function exportar() {
+  const pacote={formato:"carrinho-iesb-validacao-buscas",versao:1,exportado_em:new Date().toISOString(),referencia:"Linux 2026-11-10; mapa provisório 50x30 m; tres repeticoes; tempo nao e criterio",mapas_esperados:mapas,respostas:estado};
+  const url=URL.createObjectURL(new Blob([JSON.stringify(pacote,null,2)],{type:"application/json"}));
+  const link=document.createElement("a"); link.href=url; link.download="respostas_validacao_buscas.json"; link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function criarResumo() {
+  const linhas=["Validação das buscas — Carrinho IESB",`Responsável: ${estado.meta.responsavel||"não informado"}`,`Data: ${estado.meta.data||"não informada"}`,`Ambiente: ${estado.meta.ambiente||"não informado"}`,`Comando/notebook: ${estado.meta.comando||"não informado"}`,`Observações gerais: ${estado.meta.observacoes||"nenhuma"}`,""];
+  for (const mapa of mapas) {
+    linhas.push(`${mapa.nome} (${mapa.origem} → ${mapa.destino}):`);
+    mapa.buscas.forEach(([alg,,custo,exp],i) => {
+      const x=estado.casos[`${mapa.id}_${i}`]||{};
+      linhas.push(`- ${alg}: esperado ${custo} m / ${exp} expansões; observado ${x.custo||"?"} m / ${x.expandidos||"?"}; encontrou ${x.encontrou||"?"}; caminho válido ${x.valido||"?"}; ${resultadoCaso(mapa,i)[0]}. Caminho: ${x.caminho||"não copiado"}. ${x.notas||""}`);
+    });
+  }
+  linhas.push("", "Webots (EXT01 → H01):");
+  mapas[2].buscas.forEach(([alg],i) => { const x=estado.webots[i]||{}; linhas.push(`- ${alg}: expansões ${x.expansoes||"?"}; rota ${x.rota||"?"}; parado ${x.parado||"?"}; custo visto ${x.custo||"?"} m; nós vistos ${x.expandidos||"?"}; ${resultadoWebots(i)[0]}. ${x.notas||""}`); });
+  document.getElementById("texto-resumo").value=linhas.join("\n");
+}
+
+carregar(); desenhar();
+document.addEventListener("input",evento => {
+  const caminho=evento.target.dataset?.bind;
+  if (!caminho) return;
+  definir(caminho,evento.target.value); salvar(); atualizarStatus();
+});
+document.addEventListener("change",evento => {
+  const caminho=evento.target.dataset?.bind;
+  if (!caminho) return;
+  definir(caminho,evento.target.value); salvar(); atualizarStatus();
+});
+document.getElementById("baixar").addEventListener("click",exportar);
+document.getElementById("resumo").addEventListener("click",criarResumo);
+document.getElementById("limpar").addEventListener("click",() => {
+  if (!confirm("Apagar as respostas salvas neste navegador? Baixe um JSON antes, se quiser guardá-las.")) return;
+  estado=estadoInicial(); salvar(); desenhar(); document.getElementById("texto-resumo").value="";
+});
+document.getElementById("importar").addEventListener("change",async evento => {
+  const arquivo=evento.target.files?.[0]; if (!arquivo) return;
+  try {
+    const pacote=JSON.parse(await arquivo.text());
+    if (pacote.formato!=="carrinho-iesb-validacao-buscas" || pacote.versao!==1 || !pacote.respostas || typeof pacote.respostas!=="object") throw Error("Formato incompatível");
+    estado={...estadoInicial(),...pacote.respostas}; salvar(); desenhar();
+  } catch (erro) { alert(`Não foi possível importar: ${erro.message}`); }
+  evento.target.value="";
+});
+</script>
+</body>
+</html>

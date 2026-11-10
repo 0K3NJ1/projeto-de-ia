@@ -1,0 +1,16 @@
+mapa,algoritmo,origem,destino,nos_grafo,arestas,encontrou,custo_grade_m,nos_expandidos
+pequeno,Profundidade,EXT01,EXT04,70,123,True,64.0,64
+pequeno,Largura,EXT01,EXT04,70,123,True,10.0,66
+pequeno,Custo uniforme,EXT01,EXT04,70,123,True,10.0,66
+pequeno,Gulosa,EXT01,EXT04,70,123,True,10.0,10
+pequeno,A*,EXT01,EXT04,70,123,True,10.0,35
+medio,Profundidade,EXT01,CAN01,468,774,True,266.0,333
+medio,Largura,EXT01,CAN01,468,774,True,24.0,386
+medio,Custo uniforme,EXT01,CAN01,468,774,True,24.0,386
+medio,Gulosa,EXT01,CAN01,468,774,True,24.0,79
+medio,A*,EXT01,CAN01,468,774,True,24.0,130
+campus,Profundidade,EXT01,H01,1090,1894,True,467.0,911
+campus,Largura,EXT01,H01,1090,1894,True,29.0,697
+campus,Custo uniforme,EXT01,H01,1090,1894,True,29.0,697
+campus,Gulosa,EXT01,H01,1090,1894,True,29.0,29
+campus,A*,EXT01,H01,1090,1894,True,29.0,137
