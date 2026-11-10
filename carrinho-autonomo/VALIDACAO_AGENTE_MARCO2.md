@@ -1,5 +1,9 @@
 # Validação local do agente com ferramenta — 06/11/2026
 
+> **Atualização de 10/11/2026:** a execução hospedada no Google Colab está
+> registrada separadamente em `VALIDACAO_COLAB_MARCO2_2026-11-10.md`. As
+> seções abaixo descrevem os ensaios locais anteriores.
+
 ## Escopo
 
 Esta validação cobre o agente de texto do Marco 2 no mapa provisório do campus.
@@ -85,7 +89,8 @@ Python, sem atribuir uma nova taxa ao modelo.
 
 ## Verificações que cabem ao grupo
 
-1. Executar o notebook do início ao fim em uma **sessão nova do Google Colab**.
+1. Executar o notebook do início ao fim em uma **sessão nova do Google Colab**:
+   feito em 10/11/2026; ver `VALIDACAO_COLAB_MARCO2_2026-11-10.md`.
 2. Conferir manualmente os 15 resultados e preencher a análise de falhas,
    robustez e IA responsável no relatório de 4 a 8 páginas.
 3. Confirmar com o professor o uso do campus como domínio e se a previsão

@@ -9,8 +9,9 @@ Esta pasta é uma cópia de trabalho do projeto recuperado de `backup-documentos
 - **Etapa 3:** grade de 1 m, cinco buscas e visualizações. Ver `README_ETAPA3.md` e `GUIA_BUSCAS_WEBOTS.md`.
 - **Etapa 4:** navegação automática por motores, com localização ideal fornecida pelo Supervisor do Webots. Ver `README_NAVEGACAO.md`.
 - **Atualização de 21/10/2026:** interiores dos dez setores ampliados e acessíveis. Ver `CAMPUS_INTERIORES.md` e `VALIDACAO_INTERIORES.md`.
-- **Marco 2 em 06/11/2026:** notebook de agente com Qwen e ferramentas de rota/listagem, prompts versionados e bateria de 15 pedidos. Ver `README_AGENTE_MARCO2.md` e `VALIDACAO_AGENTE_MARCO2.md`. A avaliação do modelo é separada dos testes Python e ainda exige revisão do grupo em uma sessão nova do Colab.
+- **Marco 2 em 06/11/2026:** notebook de agente com Qwen e ferramentas de rota/listagem, prompts versionados e bateria de 15 pedidos. Ver `README_AGENTE_MARCO2.md` e `VALIDACAO_AGENTE_MARCO2.md`. A avaliação do modelo é separada dos testes Python.
 - **Reavaliação em 08/11/2026:** a v9 registra a decisão JSON do Qwen, bloqueia argumentos de rota que não constam do pedido e foi medida com os mesmos 15 casos. Os resultados e as falhas permanecem documentados em `VALIDACAO_AGENTE_MARCO2.md`.
+- **Colab em 10/11/2026:** sessão hospedada com GPU T4 executou as oito células, as cinco buscas nos três recortes, o gráfico e os 15 pedidos do agente. Resultados e limites em `VALIDACAO_COLAB_MARCO2_2026-11-10.md`.
 - **Formulário das buscas em 10/11/2026:** `validacao_buscas/FORMULARIO_BUSCAS.html` reúne a comparação dos três mapas com as cinco buscas e a conferência visual no Webots. O grupo pode exportar suas respostas em JSON; leia `validacao_buscas/LEIA_ME.md`.
 
 O projeto também inclui o notebook Colab, referências acadêmicas, testes Python e resultados locais. Materiais únicos adicionais da disciplina estão em `materiais_faculdade/`. Conversas antigas, backups, evidências históricas e duplicatas foram transferidos para um arquivo recuperável externo em 01/11/2026; veja `LIMPEZA_PROJETO.md`.

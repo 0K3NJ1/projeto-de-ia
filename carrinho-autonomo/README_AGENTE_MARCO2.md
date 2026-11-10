@@ -99,7 +99,8 @@ HF_HUB_OFFLINE=1 .venv/bin/python colab/avaliar_agente_local.py \
 
 ## Depois desta etapa
 
-O grupo deve executar o notebook em uma sessão nova **na nuvem do Colab**,
+O notebook já foi executado em uma sessão nova **na nuvem do Colab** em
+10/11/2026; veja `VALIDACAO_COLAB_MARCO2_2026-11-10.md`. O grupo deve
 revisar a comparação de versões com os mesmos 15 casos e escrever o relatório de
 4 a 8 páginas. A demonstração pode usar este notebook para mostrar a busca,
 a tabela e o gráfico de três tamanhos, o ciclo pedido → ferramenta → resposta
