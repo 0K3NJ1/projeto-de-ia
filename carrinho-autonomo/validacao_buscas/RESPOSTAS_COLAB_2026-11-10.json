@@ -1,0 +1,154 @@
+{
+  "formato": "carrinho-iesb-validacao-buscas",
+  "versao": 1,
+  "exportado_em": "2026-11-10",
+  "referencia": "Saídas observadas no Google Colab; notebook Marco 2; GPU T4; três repetições por busca; caminho e Webots ainda dependem da revisão do grupo.",
+  "respostas": {
+    "meta": {
+      "responsavel": "",
+      "data": "2026-11-10",
+      "ambiente": "Google Colab",
+      "comando": "Carrinho_IESB_Agente_Marco2.ipynb; GPU T4; reiniciar sessão e executar tudo",
+      "observacoes": "Métricas transcritas da sessão hospedada. Validade dos caminhos e Webots não foram preenchidos automaticamente."
+    },
+    "mapas": {},
+    "casos": {
+      "pequeno_0": {
+        "encontrou": "sim",
+        "custo": "64",
+        "expandidos": "64",
+        "tempo": "0.087",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "pequeno_1": {
+        "encontrou": "sim",
+        "custo": "10",
+        "expandidos": "66",
+        "tempo": "0.084",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "pequeno_2": {
+        "encontrou": "sim",
+        "custo": "10",
+        "expandidos": "66",
+        "tempo": "0.139",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "pequeno_3": {
+        "encontrou": "sim",
+        "custo": "10",
+        "expandidos": "10",
+        "tempo": "0.024",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "pequeno_4": {
+        "encontrou": "sim",
+        "custo": "10",
+        "expandidos": "35",
+        "tempo": "0.082",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "medio_0": {
+        "encontrou": "sim",
+        "custo": "266",
+        "expandidos": "333",
+        "tempo": "0.429",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "medio_1": {
+        "encontrou": "sim",
+        "custo": "24",
+        "expandidos": "386",
+        "tempo": "0.439",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "medio_2": {
+        "encontrou": "sim",
+        "custo": "24",
+        "expandidos": "386",
+        "tempo": "0.812",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "medio_3": {
+        "encontrou": "sim",
+        "custo": "24",
+        "expandidos": "79",
+        "tempo": "0.167",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "medio_4": {
+        "encontrou": "sim",
+        "custo": "24",
+        "expandidos": "130",
+        "tempo": "0.300",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "campus_0": {
+        "encontrou": "sim",
+        "custo": "467",
+        "expandidos": "911",
+        "tempo": "1.298",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "campus_1": {
+        "encontrou": "sim",
+        "custo": "29",
+        "expandidos": "697",
+        "tempo": "0.884",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "campus_2": {
+        "encontrou": "sim",
+        "custo": "29",
+        "expandidos": "697",
+        "tempo": "1.704",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "campus_3": {
+        "encontrou": "sim",
+        "custo": "29",
+        "expandidos": "29",
+        "tempo": "0.085",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      },
+      "campus_4": {
+        "encontrou": "sim",
+        "custo": "29",
+        "expandidos": "137",
+        "tempo": "0.371",
+        "valido": "",
+        "caminho": "",
+        "notas": ""
+      }
+    },
+    "webots": {}
+  }
+}

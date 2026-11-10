@@ -42,6 +42,9 @@ carrinho e não deve ser tratado como limite obrigatório em outra máquina.
 Custos e expansões coincidiram com a referência atual do projeto em
 `validacao_buscas/referencia_linux_2026-11-10.csv`. Não foi feita nesta sessão
 uma validação da janela 3D, dos motores ou dos sensores no Webots.
+Os 15 valores observados também foram transcritos para
+`validacao_buscas/RESPOSTAS_COLAB_2026-11-10.json`, importável no formulário;
+os campos de validade do caminho e de Webots continuam vazios.
 
 ## Agente Qwen v9: 15 pedidos
 

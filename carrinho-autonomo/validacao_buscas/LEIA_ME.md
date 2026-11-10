@@ -9,6 +9,12 @@ O arquivo funciona sem instalação e sem servidor. Cada integrante pode preench
 Imagens não entram no JSON: anexe as capturas separadamente e escreva seus nomes
 nas observações do formulário.
 
+O arquivo [RESPOSTAS_COLAB_2026-11-10.json](RESPOSTAS_COLAB_2026-11-10.json)
+contém os 15 custos, expansões e tempos observados em uma sessão hospedada do
+Colab. É possível importá-lo no formulário para continuar o trabalho. Ele é
+**parcial**: a conferência humana dos caminhos e os cinco ensaios visuais no
+Webots permanecem vazios.
+
 ## O que registrar
 
 1. Execute a comparação dos mapas pequeno, médio e campus no notebook ou com
