@@ -1,5 +1,18 @@
 # Carrinho IESB no Colab — grade e buscas
 
+## Marco 2: agente com ferramenta (reavaliado em 08/11/2026)
+
+Abra `Carrinho_IESB_Agente_Marco2.ipynb` para o fluxo pedido em português →
+Qwen → ferramenta de A* → resposta. O notebook também recalcula a comparação
+de buscas em três tamanhos e executa a bateria inicial de 15 pedidos do trio.
+O código fonte comentado está em `agente_marco2.py`; os pedidos esperados estão
+em `casos_marco2.py`. Veja `../README_AGENTE_MARCO2.md` para execução, limites e
+próximas verificações. Para regenerar o notebook, execute
+`python3 colab/preparar_agente_marco2.py` na raiz do projeto.
+O notebook gerado usa o prompt v9, registra a decisão JSON bruta do Qwen e
+impede calcular rotas quando os locais escolhidos não aparecem no pedido.
+As falhas e taxas locais estão em `../VALIDACAO_AGENTE_MARCO2.md`.
+
 ## Novo: A* + Qwen com código comentado (01/11/2026)
 
 Abra `Carrinho_IESB_Rotas_Comentado.ipynb` no Colab. Ele contém a primeira

@@ -1,5 +1,7 @@
 # Projeto de Inteligência Artificial — IESB 2026/2
 
+> **Marco 2 (08/11/2026):** o [notebook do agente](carrinho-autonomo/colab/Carrinho_IESB_Agente_Marco2.ipynb) integra Qwen, ferramentas e A*. O [guia](carrinho-autonomo/README_AGENTE_MARCO2.md) e a [validação](carrinho-autonomo/VALIDACAO_AGENTE_MARCO2.md) registram os 15 casos, os erros observados e 71 testes Python aprovados. A execução hospedada no Colab e a confirmação do escopo com o professor ainda estão pendentes.
+
 > **Atualização de 01/11/2026:** para baixar e executar em outro computador, leia
 > o [guia para o grupo](carrinho-autonomo/GUIA_PARA_O_GRUPO.md).
 > O mundo atual está funcional; a adaptação ao croqui medido ainda está em preparação.
